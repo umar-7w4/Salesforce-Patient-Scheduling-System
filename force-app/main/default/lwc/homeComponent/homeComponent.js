@@ -12,9 +12,13 @@ export default class HealthComponents extends LightningElement {
     healthSchedule = SCHEDULE;
     healthDoctor = DOCTOR;
     
-    showRecord = false;
+    showPatientRecord = false;
     showPatientHome = true;
+    showPatientComponent = false;
     patientData = [];
+    showProvider = false;
+
+    showProviderComponent = false;
 
     constructor() {
         super();   
@@ -22,8 +26,9 @@ export default class HealthComponents extends LightningElement {
         //this.template.addEventListener('choosed', this.handleChoosed.bind(this));
     }
 
-    handleClick(){
+    handleClickPatient(){
         this.isHomePage = false;
+        this.showPatientComponent = true;
     }
     handleChoosed(event){
         console.log(JSON.parse(JSON.stringify(event.detail)));
@@ -31,13 +36,25 @@ export default class HealthComponents extends LightningElement {
         console.log('This is running!');
         this.isHomePage = true;
         this.showPatientHome = false;
-        this.showRecord = true;
+        this.showPatientComponent = false;
+        this.showPatientRecord = true;
 
-        console.log(this.showPatientHome+" "+this.showRecord);
+        console.log(this.showPatientHome+" "+this.showPatientRecord);
     }
 
-    handleChange(){
+    handlePatientChange(){
         this.isHomePage = false;
+        this.showPatientComponent = true;
+    }
+
+    handleClickProvider(){
+        this.isHomePage = false;
+        this.showPatientComponent = false;
+        this.showProviderComponent = true;
+    }
+
+    handleClickSchedule(){
+
     }
     
 }

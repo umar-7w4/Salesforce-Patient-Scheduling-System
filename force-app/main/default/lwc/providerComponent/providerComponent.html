@@ -1,0 +1,56 @@
+<template>
+    <div style="height: 550px;">
+        <lightning-card title="Provider Search" icon-name="standard:search" class="slds-border_bottom">
+            <div class="slds-card__body slds-card__body_inner">   Input all the information and click search</div>
+            <div class="slds-border_top"></div>
+            <br>
+            <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                    <lightning-input label="First name" placeholder="Enter patient first name" onchange={handleFirstName} > </lightning-input>
+                </div>
+    
+    
+            </div>
+            <div class="slds-grid slds-wrap slds-var-p-horizontal_medium ">
+                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                    <lightning-input label="Last name" placeholder="Enter patient last name" onchange={handleLastName} > </lightning-input>
+                </div>
+    
+    
+    
+            </div>
+    
+            <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+    
+                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                    <lightning-combobox
+                        name="Gender"
+                        label="Gender"
+                        value={value}
+                        placeholder="Select gender"
+                        options={options}
+                        onchange={handleGenderChange} ></lightning-combobox>
+                </div>
+    
+    
+            </div>
+    
+            <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+    
+
+                
+            </div>
+            <br>
+            <footer class="slds-card__footer">
+                <div class="slds-text-align_right">
+                    <lightning-button type="search" label="Search" onclick={handleSubmit} variant="brand" ></lightning-button>  
+                </div>  
+            </footer>
+    
+        </lightning-card>
+    </div>
+    </template>
+    
+    
+    
+    
