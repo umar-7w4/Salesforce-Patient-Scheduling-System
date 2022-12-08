@@ -1,0 +1,117 @@
+<template> 
+    <template if:true={isHomePage}>
+            <lightning-card>
+                <lightning-layout horizontal-align={horizontalAlign}>
+                    <template if:true={showPatientHome}>
+                        <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);"  flexibility="auto" padding="around-small">
+                            <lightning-card >
+                                <div class="slds-align_absolute-center slds-p-around_x-small">
+                                    <img src={healthPatient}>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <b>Patient Access</b>
+                                </div>
+                                <div class="slds-align_absolute-center slds-p-around_x-small">
+                                    <p style = "text-align:center;">Add the Patient Requesting this encounter through this sections</p>
+                                </div>   
+                                <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClick}></lightning-button>
+                                </lightning-card>
+                        </lightning-layout-item>
+                    </template>
+                    <template if:true={showRecord} >
+                        <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);"  flexibility="auto" padding="around-small">
+                            <lightning-card>
+                                <article class="slds-card">
+                                    <div class="slds-card__header slds-grid">
+                                      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__figure">
+                                            <img src={healthPatient} width="30" height="30">
+                                        </div>
+                                        <div class="slds-media__body">
+                                         <h2 class="slds-card__header-title">
+                                            <a href="#" class="slds-card__header-link slds-truncate" title="Accounts">
+                                              <span>Patients</span>
+                                            </a>
+                                          </h2>
+                                        </div>
+                                      </header>
+                                    </div>
+                                </article>
+                                <div class="slds-border_top"></div>
+                                <div class="slds-m-around_medium">
+                                    <template for:each={patientData} for:item="acc">
+
+
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={acc.Id} >
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                                                <div key={acc.Id}>
+                                                    <p><strong>Patient Name</strong></p>
+                                                    <div>
+                                                        <p>{acc.Name}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                                                <div key={acc.Id}>
+                                                    <p><strong>Patient Phone</strong></p>
+                                                    <div>
+                                                        <p>{acc.Phone}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                                                <div key={acc.Id}>
+                                                    <p><strong>Patient Email</strong></p>
+                                                    <div>
+                                                        <p>{acc.Email__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
+                                
+                                        </div>
+
+                                    </template>
+                                </div>
+                            </lightning-card>
+                        </lightning-layout-item>
+                    </template>
+                    <lightning-layout-item class="slds-m-around_large " style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
+                        <lightning-card>
+                            <div class="slds-align_absolute-center  slds-p-around_x-small" >
+                                <img src={healthDoctor}  width="52" height="52">
+                            </div>
+                            <div class="slds-align_absolute-center">
+                                <b>Provider Search</b>
+                            </div>
+                            <div class="slds-align_absolute-center  slds-p-around_x-small" >
+                                <p style = "text-align:center;">Add the provider(s) needed for the encounter through this section</p>
+                            </div>                           
+                            <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClick}></lightning-button>
+                            </lightning-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
+                        <lightning-card >
+                            <div class="slds-align_absolute-center  slds-p-around_x-small" >
+                                <img src={healthSchedule}>
+                            </div>
+                            <div class="slds-align_absolute-center">
+                                <b>Referral Scheduling</b>
+                            </div>
+                            <div class="slds-align_absolute-center  slds-p-around_x-small">
+                                <p style = "text-align:center;">Add the Date & Time of this encounter through this section</p>
+                            </div>
+                            <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClick}></lightning-button>
+                            </lightning-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-card>
+    </template>
+
+    <template if:false={isHomePage}>
+        <c-patient-component></c-patient-component>
+        <c-patient-result onchoosed={handleChoosed}></c-patient-result>
+    </template>
+</template>

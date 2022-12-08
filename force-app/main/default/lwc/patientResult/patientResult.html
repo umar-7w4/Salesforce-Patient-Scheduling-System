@@ -1,0 +1,111 @@
+<template>
+    <lightning-card title="Patients" icon-name="standard:people" class="slds-border_bottom">
+        <lightning-button label="New Patient" slot="actions" onclick={handleModal}></lightning-button>
+        <lightning-button label="Choose Patient" onclick={handlePublish} slot="actions" class="slds-p-left_small"></lightning-button>
+        <div class="slds-card__body slds-card__body_inner">  {resultLength} Results</div>
+        <div class="slds-table_col-bordered slds-table_bordered" style="height: 500px;" >
+            <lightning-datatable key-field="id" 
+                    data={accountData}
+                    columns={columns}
+                    onrowselection={handleRowSelection}
+                    max-row-selection=1
+                    >                  
+            </lightning-datatable>
+       </div>
+      </lightning-card>
+      
+      <template if:true={isShowModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+            <!-- modal header start -->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Patient</h2>
+                <p class="slds-align_absolute-center">Input all information and click create</p>
+            </header>
+    
+            <!-- modal body start -->
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+    
+    
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+                    <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                        <lightning-input label="First name" placeholder="Enter patient first name" onchange={handleFirstName} > </lightning-input>
+                    </div>
+        
+                    <div class="slds-col slds-size_4-of-12 slds-p-around_small ">
+                        <lightning-input label="SSN" placeholder="Enter patient SSN" onchange={handleSSNChange} > </lightning-input>
+                    </div>
+        
+                    <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                        <lightning-input label="Country" placeholder="Enter patient country" onchange={handleCountryChange} > </lightning-input>
+                    </div>
+        
+                </div>
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium ">
+                    <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                        <lightning-input label="Last name" placeholder="Enter patient last name" onchange={handleLastName} > </lightning-input>
+                    </div>
+        
+                    <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                        <lightning-input label="Phone" placeholder="Enter patient phone" onchange={handlePhoneChange} > </lightning-input>
+                    </div>
+        
+                    <div class="slds-col slds-size_2-of-12 slds-p-around_small">
+                        <lightning-input label="State" placeholder="Enter patient state" onchange={handleStateChange} > </lightning-input>
+                    </div>
+        
+                    <div class="slds-col slds-size_2-of-12 slds-p-around_small">
+                        <lightning-input label="City" placeholder="Enter patient country" onchange={handleCityChange} > </lightning-input>
+                    </div>
+        
+        
+                </div>
+        
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+        
+                    <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                        <lightning-input type="date" label="Birth Date" placeholder="Enter patient date of birth" onchange={handleDateChange}></lightning-input>
+                    </div>
+        
+                    <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                        <lightning-input label="Email" placeholder="Enter patient email" onchange={handleEmailChange} > </lightning-input>
+                    </div>
+        
+                    <div class="slds-col slds-size_2-of-12 slds-p-around_small">
+                        <lightning-input label="Street" placeholder="Enter patient country" onchange={handleStreetChange} > </lightning-input>
+                    </div>
+        
+                    <div class="slds-col slds-size_2-of-12 slds-p-around_small">
+                        <lightning-input label="Zipcode" placeholder="Enter patient country" onchange={handleZipChange} > </lightning-input>
+                    </div>
+        
+                </div>
+        
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+        
+                    <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                        <lightning-input label="MRN" placeholder="Enter patient MRN" onchange={handleMRNChange} > </lightning-input>
+                    </div>
+        
+                    
+                </div>
+            </div>
+    
+            <!-- modal footer start-->
+            <footer class="slds-modal__footer">
+                <lightning-button type="cancel"  onclick={hideModalBox} label="Cancel" ></lightning-button> 
+                <lightning-button type="submit" label="Create & Select" onclick={handleSubmit} variant="brand" class="slds-p-left_small"></lightning-button> 
+            </footer>
+    
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+</template>

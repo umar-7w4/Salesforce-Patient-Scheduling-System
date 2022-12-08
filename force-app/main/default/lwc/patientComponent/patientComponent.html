@@ -1,0 +1,81 @@
+<template>
+<div style="height: 550px;">
+    <lightning-card title="Search Results" icon-name="standard:search" class="slds-border_bottom">
+        <div class="slds-card__body slds-card__body_inner">  {resultLength} Results</div>
+        <div class="slds-border_top"></div>
+        <br>
+        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                <lightning-input label="First name" placeholder="Enter patient first name" onchange={handleFirstName} > </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_4-of-12 slds-p-around_small ">
+                <lightning-input label="SSN" placeholder="Enter patient SSN" onchange={handleSSNChange} > </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                <lightning-input label="Country" placeholder="Enter patient country" onchange={handleCountryChange} > </lightning-input>
+            </div>
+
+        </div>
+        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium ">
+            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                <lightning-input label="Last name" placeholder="Enter patient last name" onchange={handleLastName} > </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                <lightning-input label="Phone" placeholder="Enter patient phone" onchange={handlePhoneChange} > </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_2-of-12 slds-p-around_small">
+                <lightning-input label="State" placeholder="Enter patient state" onchange={handleStateChange} > </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_2-of-12 slds-p-around_small">
+                <lightning-input label="City" placeholder="Enter patient country" onchange={handleCityChange} > </lightning-input>
+            </div>
+
+
+        </div>
+
+        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+
+            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                <lightning-input type="date" label="Birth Date" placeholder="Enter patient date of birth" onchange={handleDateChange}></lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                <lightning-input label="Email" placeholder="Enter patient email" onchange={handleEmailChange} > </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_2-of-12 slds-p-around_small">
+                <lightning-input label="Street" placeholder="Enter patient country" onchange={handleStreetChange} > </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_2-of-12 slds-p-around_small">
+                <lightning-input label="Zipcode" placeholder="Enter patient country" onchange={handleZipChange} > </lightning-input>
+            </div>
+
+        </div>
+
+        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+
+            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
+                <lightning-input label="MRN" placeholder="Enter patient MRN" onchange={handleMRNChange} > </lightning-input>
+            </div>
+
+            
+        </div>
+        <br>
+        <footer class="slds-card__footer">
+            <div class="slds-text-align_right">
+                <lightning-button type="search" label="Search" onclick={handleSubmit} variant="brand" ></lightning-button>  
+            </div>  
+        </footer>
+
+    </lightning-card>
+</div>
+</template>
+
+
+
