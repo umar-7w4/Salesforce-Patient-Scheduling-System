@@ -180,7 +180,8 @@ export default class PatientResult extends LightningElement {
             accName = this.firstName+" "+this.lastName;
         }
         CREATEACCOUNT({ 
-            name : accName,
+            firstName : this.firstName,
+            lastName : this.lastName,
             phone : this.phone, 
             email : this.email,
             ssn : this.ssn, 
@@ -193,8 +194,12 @@ export default class PatientResult extends LightningElement {
             dateofBirth : this.dateofBirth
         })
         .then(result => {
+            console.log('Result');
             console.log(result);
-            this.dispatchEvent(event);
+            this.patientsDT.push(result);
+
+            const selectedEvent = new CustomEvent('choosed', { detail: this.patientsDT });
+            this.dispatchEvent(selectedEvent);
         })
         .catch(error => {
             console.log(error);
@@ -250,13 +255,15 @@ export default class PatientResult extends LightningElement {
    }
 
     handlePublish(){
-        const payload = { data: this.patientsDT };
-        publish(this.messageContext, dataChannel, payload);
-        console.log('payload');
-        console.log(payload);
+        if(this.patientsDT.length>0){
+            const payload = { data: this.patientsDT };
+            publish(this.messageContext, dataChannel, payload);
+            console.log('payload');
+            console.log(payload);
 
-        const selectedEvent = new CustomEvent('choosed', { detail: this.patientsDT });
-        this.dispatchEvent(selectedEvent);
+            const selectedEvent = new CustomEvent('choosed', { detail: this.patientsDT });
+            this.dispatchEvent(selectedEvent);
+        }
     }
 
     handleModal(){

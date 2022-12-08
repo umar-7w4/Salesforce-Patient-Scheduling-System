@@ -88,7 +88,8 @@ export default class PatientComponent extends LightningElement {
             accName = this.firstName+" "+this.lastName;
         }
         Apex_Method_One_Ref({ 
-            name : accName,
+            firstName : this.firstName,
+            lastName : this.lastName,
             phone : this.phone, 
             email : this.email,
             ssn : this.ssn, 

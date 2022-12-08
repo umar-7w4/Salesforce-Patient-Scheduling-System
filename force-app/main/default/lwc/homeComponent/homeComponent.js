@@ -26,6 +26,7 @@ export default class HealthComponents extends LightningElement {
         this.isHomePage = false;
     }
     handleChoosed(event){
+        console.log(JSON.parse(JSON.stringify(event.detail)));
         this.patientData = event.detail;
         console.log('This is running!');
         this.isHomePage = true;
@@ -33,7 +34,10 @@ export default class HealthComponents extends LightningElement {
         this.showRecord = true;
 
         console.log(this.showPatientHome+" "+this.showRecord);
-        
+    }
+
+    handleChange(){
+        this.isHomePage = false;
     }
     
 }

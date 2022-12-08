@@ -20,57 +20,85 @@
                     </template>
                     <template if:true={showRecord} >
                         <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);"  flexibility="auto" padding="around-small">
-                            <lightning-card>
-                                <article class="slds-card">
-                                    <div class="slds-card__header slds-grid">
-                                      <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                                        <div class="slds-media__figure">
-                                            <img src={healthPatient} width="30" height="30">
-                                        </div>
-                                        <div class="slds-media__body">
-                                         <h2 class="slds-card__header-title">
-                                            <a href="#" class="slds-card__header-link slds-truncate" title="Accounts">
-                                              <span>Patients</span>
-                                            </a>
-                                          </h2>
-                                        </div>
-                                      </header>
-                                    </div>
-                                </article>
+                            <lightning-card title="Patients" icon-name="custom:custom15">
+                                <lightning-button label="Change" slot="actions" onclick={handleChange}></lightning-button>
+
                                 <div class="slds-border_top"></div>
                                 <div class="slds-m-around_medium">
                                     <template for:each={patientData} for:item="acc">
-
-
+                                        <div class="slds-text-heading_small slds-p-bottom_small" key={acc.Id}>
+                                            <strong>{acc.Name}</strong>
+                                        </div>
                                         <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={acc.Id} >
-                                            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
-                                                <div key={acc.Id}>
-                                                    <p><strong>Patient Name</strong></p>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient First Name</p>
                                                     <div>
-                                                        <p>{acc.Name}</p>
+                                                        <p>{acc.FirstName}</p>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
-                                                <div key={acc.Id}>
-                                                    <p><strong>Patient Phone</strong></p>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient Phone</p>
                                                     <div>
                                                         <p>{acc.Phone}</p>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="slds-col slds-size_4-of-12 slds-p-around_small">
-                                                <div key={acc.Id}>
-                                                    <p><strong>Patient Email</strong></p>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient Email</p>
                                                     <div>
                                                         <p>{acc.Email__c}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                
-                                
+                                        </div>
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={acc.Id} >
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient Last Name</p>
+                                                    <div>
+                                                        <p>{acc.LastName}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient MRN</p>
+                                                    <div>
+                                                        <p>{acc.MRN__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient SSN</p>
+                                                    <div>
+                                                        <p>{acc.SSN__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={acc.Id} >
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient Birth Date</p>
+                                                    <div>
+                                                        <p>{acc.Birth_Date__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient Address</p>
+                                                    <div>
+                                                        <p>{acc.BillingPostalCode} {acc.BillingStreet} {acc.BillingCity} {acc.BillingState} {BillingCountry} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </template>
@@ -78,7 +106,7 @@
                             </lightning-card>
                         </lightning-layout-item>
                     </template>
-                    <lightning-layout-item class="slds-m-around_large " style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
+                    <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
                         <lightning-card>
                             <div class="slds-align_absolute-center  slds-p-around_x-small" >
                                 <img src={healthDoctor}  width="52" height="52">
