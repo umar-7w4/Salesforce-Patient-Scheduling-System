@@ -11,7 +11,6 @@ export default class HealthComponents extends LightningElement {
     healthProvider = PROVIDER;
     healthSchedule = SCHEDULE;
     healthDoctor = DOCTOR;
-    check;
     
     showRecord = false;
     showPatientHome = true;
