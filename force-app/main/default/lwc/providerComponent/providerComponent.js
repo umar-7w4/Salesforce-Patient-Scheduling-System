@@ -52,11 +52,8 @@ export default class ProviderComponent extends LightningElement {
         //console.log(this.endTime);
     }
 
-    handleSpecialityChange(event){
-        //console.log(event.detail.value);
+    handleSpeciality(event){
         this.speciality = event.detail.value;
-        //JSON.parse(JSON.stringify(event.detail.value));
-        //console.log(this.selectedSpecialities);
     }
 
     handleTaxonomy(event){
@@ -96,37 +93,6 @@ export default class ProviderComponent extends LightningElement {
             { label: '100 Miles Away', value: '100 Miles Away' },
         ];
     }
-    
-    get optionsSpeciality(){
-        return [
-            { label: 'Internal medicine', value: 'Internal medicine' },
-            { label: 'Anesthesiology', value: 'Anesthesiology' },
-            { label: 'Neurology', value: 'Neurology' },
-            { label: 'Orthopedics', value: 'Orthopedics' },
-            { label: 'Psychiatry', value: 'Psychiatry' },
-            { label: 'Pediatrics', value: 'Pediatrics' },
-            { label: 'Dermatology', value: 'Dermatology' },
-            { label: 'Family medicine', value: 'Family medicine' },
-            { label: 'Radology', value: 'Radology' },
-            { label: 'Pathaology', value: 'Pathaology' },
-            { label: 'General Surgery', value: 'General Surgery' },
-            { label: 'Oncology', value: 'Oncology' },
-            { label: 'Urology', value: 'Urology' },
-            { label: 'Nuclear medicine', value: 'Nuclear medicine' },
-            { label: 'Cardiology', value: 'Cardiology' },
-            { label: 'Orthopedics', value: 'Orthopedics' },
-            { label: 'Plastic surgery', value: 'Plastic surgery' },
-            { label: 'Neurosurgeon', value: 'Neurosurgeon' },
-            { label: 'Hematology', value: 'Hematology' },
-            { label: 'Endocrinology', value: 'Endocrinology' },
-            { label: 'Gerialtrics', value: 'Gerialtrics' },
-            { label: 'Vascular surgery', value: 'Vascular surgery' },
-            { label: 'Gynaecology', value: 'Gynaecology' },
-            { label: 'Neonatology', value: 'Neonatology' },
-            { label: 'Neurology', value: 'Neurology' },
-            { label: 'Pain management', value: 'Pain management' },
-        ];
-    }
 
 
     @wire(MessageContext)
@@ -135,30 +101,24 @@ export default class ProviderComponent extends LightningElement {
     providers = [];
 
     handleSubmit(event){
-        var providerName;
-        if(this.lastName==undefined){
-            providerName = this.firstName;
-        }
-        else{
-            providerName = this.firstName+" "+this.lastName;
-        }
         GETPROVIDERS({ 
-            name: providerName,
+            firstName: this.firstName,
+            lastName : this.lastName,
             gender : this.gender, 
             inNetwork : this.inNetwork,
             taxonomy : this.taxanomy, 
             startTime : this.startTime,
             endTime : this.endTime, 
             distance : this.distance,
-            specialities : this.selectedSpecialities, 
+            speciality : this.speciality, 
             location : this.location
         })
         .then(result => {
             this.providers = result;
             this.resultLength = this.providers.length;
             
-            console.log(providerName+" "+this.gender+" "+this.inNetwork+" "+this.taxanomy+" "+this.startTime+" "+this.endTime+" "+this.distance+this.location);
-            console.log(this.selectedSpecialities);
+            console.log(this.firstName+" "+this.lastName+" "+this.gender+" "+this.inNetwork+" "+this.taxanomy+" "+this.startTime+" "+this.endTime+" "+this.distance+" "+this.location);
+            console.log(this.speciality);
             console.log(this.providers);
 
             this.dispatchEvent(event);

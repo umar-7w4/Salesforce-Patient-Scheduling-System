@@ -19,7 +19,7 @@
                         </lightning-layout-item>
                     </template>
                     <template if:true={showPatientRecord} >
-                        <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);"  flexibility="auto" padding="around-small">
+                        <lightning-layout-item class="slds-m-around_large"  style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
                             <lightning-card title="Patients" icon-name="custom:custom15">
                                 <lightning-button label="Change" slot="actions" onclick={handlePatientChange}></lightning-button>
 
@@ -106,20 +106,110 @@
                             </lightning-card>
                         </lightning-layout-item>
                     </template>
-                    <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
-                        <lightning-card>
-                            <div class="slds-align_absolute-center  slds-p-around_x-small" >
-                                <img src={healthDoctor}  width="52" height="52">
-                            </div>
-                            <div class="slds-align_absolute-center">
-                                <b>Provider Search</b>
-                            </div>
-                            <div class="slds-align_absolute-center  slds-p-around_x-small" >
-                                <p style = "text-align:center;">Add the provider(s) needed for the encounter through this section</p>
-                            </div>                           
-                            <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClickProvider}></lightning-button>
+                    <template if:true={showProviderHome}>
+                        <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
+                            <lightning-card>
+                                <div class="slds-align_absolute-center  slds-p-around_x-small" >
+                                    <img src={healthDoctor}  width="52" height="52">
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <b>Provider Search</b>
+                                </div>
+                                <div class="slds-align_absolute-center  slds-p-around_x-small" >
+                                    <p style = "text-align:center;">Add the provider(s) needed for the encounter through this section</p>
+                                </div>                           
+                                <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClickProvider}></lightning-button>
                             </lightning-card>
-                    </lightning-layout-item>
+                        </lightning-layout-item>
+                    </template>
+                    <template if:true={showProviderRecord}>
+                        <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);"  flexibility="auto" padding="around-small">
+                            <lightning-card title="Providers" icon-name="custom:custom86">
+                                <lightning-button label="Change" slot="actions" onclick={handleProviderChange}></lightning-button>
+
+                                <div class="slds-border_top"></div>
+                                <div class="slds-m-around_medium">
+                                    <template for:each={providerData} for:item="acc">
+                                        <div class="slds-text-heading_small slds-p-bottom_small" key={acc.Id}>
+                                            <strong>{acc.Provider_Name__c}</strong>
+                                        </div>
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={acc.Id} >
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider First Name</p>
+                                                    <div>
+                                                        <p>{acc.First_Name__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider Gender</p>
+                                                    <div>
+                                                        <p>{acc.Gender__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider In Network</p>
+                                                    <div>
+                                                        <p>{acc.In_Network__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={acc.Id} >
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider Last Name</p>
+                                                    <div>
+                                                        <p>{acc.Last_Name__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider Start Time</p>
+                                                    <div>
+                                                        <p>{acc.Start_Time__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider End Time</p>
+                                                    <div>
+                                                        <p>{acc.End_Time__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={acc.Id} >
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider Speciality</p>
+                                                    <div>
+                                                        <p>{acc.Speciality__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider Location</p>
+                                                    <div>
+                                                        <p>{acc.Location__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </template>
+                                </div>
+                            </lightning-card>
+                        </lightning-layout-item>
+                    </template>
                     <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
                         <lightning-card >
                             <div class="slds-align_absolute-center  slds-p-around_x-small" >
@@ -145,6 +235,6 @@
 
     <template if:true={showProviderComponent}>
         <c-provider-component></c-provider-component>
-        <c-provider-result></c-provider-result>
+        <c-provider-result onproviderchoosed={handleProviderChoosed} ></c-provider-result>
     </template>
 </template>

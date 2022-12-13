@@ -211,8 +211,6 @@ export default class PatientResult extends LightningElement {
             this.dispatchEvent(event);
         });
         this.accountName = this.firstName+" "+this.lastName;
-        //console.log(this.firstName+" "+this.lastName+" "+this.phone+" "+this.email+" "+this.ssn+" "+this.mrn+this.accountName);
-
 
     }
 

@@ -16,7 +16,7 @@ import SPECIALITY from '@salesforce/schema/Provider__c.Speciality__c';
 import STARTTIME from '@salesforce/schema/Provider__c.Start_Time__c';
 import TAXONOMY from '@salesforce/schema/Provider__c.Taxonomy__c';
 
-import dataChannel from '@salesforce/messageChannel/DataChannel__c';
+import dataChannel2 from '@salesforce/messageChannel/DataChannel2__c';
 import {
     subscribe,
     unsubscribe,
@@ -86,5 +86,55 @@ export default class ProviderResult extends LightningElement {
     subscription = null;
     showResult = true;
 
+    connectedCallback() {
+        this.subscribeToMessageChannel();
+    }
+
+    subscribeToMessageChannel() {
+        if (!this.subscription) {
+            this.subscription = subscribe(
+                this.messageContext,
+                dataChannel2,
+                (message) => this.handleMessage(message)
+            );
+        }
+    }
+    
+    unsubscribeToMessageChannel() {
+        unsubscribe(this.subscription);
+        this.subscription = null;
+    }
+
+    disconnectedCallback() {
+        this.unsubscribeToMessageChannel();
+    }
+    
+    handleMessage(message) {
+        this.providersData = message.data;
+        this.resultLength = this.providersData.length;
+        console.log("Provider data : "+this.providersData);
+        //this.unsubscribeToMessageChannel();
+    }
+
+    handleRowSelection = event => {
+        const  selectedRows = event.detail.selectedRows;
+        console.log(selectedRows);
+        this.providersDT = JSON.parse(JSON.stringify(selectedRows));
+        console.log(JSON.parse(JSON.stringify(selectedRows)));
+        console.log(this.providersDT);
+   }
+
+   handlePublish(){
+    if(this.providersDT.length>0){
+        const payload = { data: this.providersDT };
+        publish(this.messageContext, dataChannel2, payload);
+        console.log('payload');
+        console.log(payload);
+
+        console.log(this.providersDT);
+        const selectedEvent2 = new CustomEvent('providerchoosed', { detail: this.providersDT });
+        this.dispatchEvent(selectedEvent2);
+    }
+}
 
 }
