@@ -12,6 +12,9 @@ export default class HealthComponents extends LightningElement {
     healthSchedule = SCHEDULE;
     healthDoctor = DOCTOR;
 
+    providerButton = true;
+    scheduleButton = true;
+
     patientData = [];
     providerData = [];
     
@@ -38,6 +41,7 @@ export default class HealthComponents extends LightningElement {
         this.patientData = event.detail;
         console.log('This is running!');
         this.isHomePage = true;
+        this.providerButton = false;
         this.showPatientHome = false;
         this.showPatientComponent = false;
         this.showPatientRecord = true;
@@ -50,6 +54,7 @@ export default class HealthComponents extends LightningElement {
         this.providerData = event.detail;
         console.log('This is running for provider!');
         this.isHomePage = true;
+        this.scheduleButton = false;
         this.showProviderHome = false;
         this.showProviderComponent = false;
         this.showProviderRecord = true;

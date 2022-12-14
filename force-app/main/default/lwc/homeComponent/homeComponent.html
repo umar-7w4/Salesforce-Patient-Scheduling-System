@@ -3,24 +3,26 @@
             <lightning-card>
                 <lightning-layout horizontal-align={horizontalAlign}>
                     <template if:true={showPatientHome}>
-                        <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);"  flexibility="auto" padding="around-small">
-                            <lightning-card >
-                                <div class="slds-align_absolute-center slds-p-around_x-small">
-                                    <img src={healthPatient}>
+                        <lightning-layout-item class="slds-m-around_large" flexibility="auto" padding="around-small">
+                            <lightning-card class="my-card" >
+                                <div class="slds-p-top_xx-large">
+                                    <div class="slds-align_absolute-center slds-p-around_x-small slds-p-top_large">
+                                        <img src={healthPatient}>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <b>Patient Access</b>
+                                    </div>
+                                    <div class="slds-align_absolute-center slds-p-around_x-small">
+                                        <p style = "text-align:center;">Add the Patient Requesting this encounter through this sections</p>
+                                    </div>   
+                                    <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClickPatient}></lightning-button>
                                 </div>
-                                <div class="slds-align_absolute-center">
-                                    <b>Patient Access</b>
-                                </div>
-                                <div class="slds-align_absolute-center slds-p-around_x-small">
-                                    <p style = "text-align:center;">Add the Patient Requesting this encounter through this sections</p>
-                                </div>   
-                                <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClickPatient}></lightning-button>
                                 </lightning-card>
                         </lightning-layout-item>
                     </template>
                     <template if:true={showPatientRecord} >
-                        <lightning-layout-item class="slds-m-around_large"  style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
-                            <lightning-card title="Patients" icon-name="custom:custom15">
+                        <lightning-layout-item class="slds-m-around_large"  flexibility="auto" padding="around-small">
+                            <lightning-card title="Patients" icon-name="custom:custom15" class="my-card2" >
                                 <lightning-button label="Change" slot="actions" onclick={handlePatientChange}></lightning-button>
 
                                 <div class="slds-border_top"></div>
@@ -107,24 +109,26 @@
                         </lightning-layout-item>
                     </template>
                     <template if:true={showProviderHome}>
-                        <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
-                            <lightning-card>
-                                <div class="slds-align_absolute-center  slds-p-around_x-small" >
-                                    <img src={healthDoctor}  width="52" height="52">
+                        <lightning-layout-item class="slds-m-around_large" flexibility="auto" padding="around-small">
+                            <lightning-card class="my-card" >
+                                <div class="slds-p-top_xx-large">
+                                    <div class="slds-align_absolute-center  slds-p-around_x-small" >
+                                        <img src={healthDoctor}  width="52" height="52">
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <b>Provider Search</b>
+                                    </div>
+                                    <div class="slds-align_absolute-center  slds-p-around_x-small" >
+                                        <p style = "text-align:center;">Add the provider(s) needed for the encounter through this section</p>
+                                    </div>                           
+                                    <lightning-button class="slds-align_absolute-center slds-p-bottom_large"  variant="neutral" label="Get Started" onclick={handleClickProvider}></lightning-button>
                                 </div>
-                                <div class="slds-align_absolute-center">
-                                    <b>Provider Search</b>
-                                </div>
-                                <div class="slds-align_absolute-center  slds-p-around_x-small" >
-                                    <p style = "text-align:center;">Add the provider(s) needed for the encounter through this section</p>
-                                </div>                           
-                                <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClickProvider}></lightning-button>
                             </lightning-card>
                         </lightning-layout-item>
                     </template>
                     <template if:true={showProviderRecord}>
-                        <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);"  flexibility="auto" padding="around-small">
-                            <lightning-card title="Providers" icon-name="custom:custom86">
+                        <lightning-layout-item class="slds-m-around_large" flexibility="auto" padding="around-small">
+                            <lightning-card title="Providers" icon-name="custom:custom86" class="my-card2">
                                 <lightning-button label="Change" slot="actions" onclick={handleProviderChange}></lightning-button>
 
                                 <div class="slds-border_top"></div>
@@ -210,19 +214,21 @@
                             </lightning-card>
                         </lightning-layout-item>
                     </template>
-                    <lightning-layout-item class="slds-m-around_large" style="border: 2px solid rgb(68, 183, 255);" flexibility="auto" padding="around-small">
-                        <lightning-card >
-                            <div class="slds-align_absolute-center  slds-p-around_x-small" >
-                                <img src={healthSchedule}>
+                    <lightning-layout-item class="slds-m-around_large"   flexibility="auto" padding="around-small">
+                        <lightning-card class="my-card" >
+                            <div class="slds-p-top_xx-large">
+                                <div class="slds-align_absolute-center  slds-p-around_x-small" >
+                                    <img src={healthSchedule}>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <b>Referral Scheduling</b>
+                                </div>
+                                <div class="slds-align_absolute-center  slds-p-around_x-small">
+                                    <p style = "text-align:center;">Add the Date & Time of this encounter through this section</p>
+                                </div>
+                                <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClickSchedule}></lightning-button>
                             </div>
-                            <div class="slds-align_absolute-center">
-                                <b>Referral Scheduling</b>
-                            </div>
-                            <div class="slds-align_absolute-center  slds-p-around_x-small">
-                                <p style = "text-align:center;">Add the Date & Time of this encounter through this section</p>
-                            </div>
-                            <lightning-button class="slds-align_absolute-center slds-p-bottom_large" variant="neutral" label="Get Started" onclick={handleClickSchedule}></lightning-button>
-                            </lightning-card>
+                        </lightning-card>
                     </lightning-layout-item>
                 </lightning-layout>
             </lightning-card>

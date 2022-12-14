@@ -1,0 +1,13 @@
+.my-card {
+    display: block;
+    border: 2px solid rgb(68, 183, 255);
+    min-height: 330px;
+    border-radius: 8px;
+}
+.my-card2{
+    display: block;
+    border: 2px solid rgb(68, 183, 255);
+    min-height: 330px;
+    border-radius: 8px;
+    padding-top: 10px;
+}
