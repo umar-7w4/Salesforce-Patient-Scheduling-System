@@ -97,7 +97,7 @@ public static List<Account> getPatientDetails(String firstName, String lastName,
     System.debug('condition '+condition);
         if (String.isNotBlank(condition)) {
             query = 'SELECT Name, FirstName, LastName, Phone, Email__c , SSN__c, MRN__c, BillingCountry, BillingState,  BillingCity, BillingStreet, BillingPostalCode, Birth_Date__c FROM Account WHERE ' +
-                condition +' AND '+conditionRT+
+                '( '+condition +') AND '+conditionRT+
                 ' ORDER BY Name';
 
         } else {
@@ -126,6 +126,7 @@ String country, String city, String state, String zipcode, String street, String
         patient.BillingCity = city;
         patient.BillingStreet = street;
         patient.BillingPostalCode = zipcode;
+        patient.OwnerId = userinfo.getUserId();
         patient.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Person Account').getRecordTypeId();
 
         try{

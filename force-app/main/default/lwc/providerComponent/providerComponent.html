@@ -1,16 +1,18 @@
 <template>
-    <div style="height: 600px;">
+    <div style="height: 590px;">
         <lightning-card title="Provider Search" icon-name="standard:search" class="slds-border_bottom">
+            <lightning-button label="Back to Home page" slot="actions" onclick={handleBackPage}></lightning-button>
             <div class="slds-card__body slds-card__body_inner">   Input all the information and click search</div>
             <div class="slds-border_top"></div>
             <br>
             <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+
                 <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input label="First name" placeholder="Enter patient first name" onchange={handleFirstName} > </lightning-input>
+                    <lightning-input label="Last name" placeholder="Provider last name" onchange={handleLastName} > </lightning-input>
                 </div>
 
                 <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input label="Last name" placeholder="Enter patient last name" onchange={handleLastName} > </lightning-input>
+                    <lightning-input label="First name" placeholder="Provider first name" onchange={handleFirstName} > </lightning-input>
                 </div>
 
                 <div class="slds-col slds-size_3-of-12 slds-p-around_small">
@@ -35,13 +37,11 @@
                     </lightning-combobox>
                 </div>
 
-
-    
             </div>
             <div class="slds-grid slds-wrap slds-var-p-horizontal_medium ">
 
                 <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input label="Taxonomy" placeholder="Enter Taxonomy" onchange={handleTaxonomy} > </lightning-input>
+                    <lightning-input label="Taxonomy" placeholder="Provider Taxonomy" onchange={handleTaxonomy} > </lightning-input>
                 </div>
 
                 <div class="slds-col slds-size_3-of-12 slds-p-around_small">
@@ -74,7 +74,7 @@
 
 
                 <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input label="Speciality" placeholder="Enter provider speciality" onchange={handleSpeciality} > </lightning-input>
+                    <lightning-input label="Speciality" placeholder="Provider speciality" onchange={handleSpeciality} > </lightning-input>
                 </div>
 
             </div>

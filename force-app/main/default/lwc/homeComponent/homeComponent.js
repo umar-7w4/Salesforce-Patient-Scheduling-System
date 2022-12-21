@@ -26,6 +26,10 @@ export default class HealthComponents extends LightningElement {
     showProviderRecord = false;
     showProviderComponent = false;
 
+    showScheduleHome = true;
+    showScheduleRecord = false;
+    showScheduleComponent = false;
+
     constructor() {
         super();   
         this.isHomePage = true;
@@ -76,6 +80,63 @@ export default class HealthComponents extends LightningElement {
         this.isHomePage = false;
         this.showPatientComponent = false;
         this.showProviderComponent = true;
+    }
+
+    handleClickSchedule(){
+        this.isHomePage = false;
+        this.showPatientComponent = false;
+        this.showProviderComponent = false;
+        this.showScheduleComponent = true;
+    }
+
+    handleBackFromPatient(){
+        this.isHomePage = true;
+        if(this.showPatientRecord){
+            this.showPatientHome = false;
+            this.showPatientComponent = false;
+            this.showPatientRecord = true;
+        }
+        else{
+            this.showPatientHome = true;
+            this.showPatientComponent = false;
+        }
+    }
+
+    handleBackFromProvider(){
+        this.isHomePage = true;
+        if(this.showProviderRecord){
+            if(this.showPatientRecord){
+                this.showPatientHome = false;
+                this.showPatientComponent = false;
+                this.showPatientRecord = true;
+            }
+            else{
+                this.showPatientHome = true;
+                this.showPatientComponent = false;
+            }
+
+            this.showProviderHome = false;
+            this.showProviderComponent = false;
+            this.showProviderRecord = true;
+        }
+        else{
+            if(this.showPatientRecord){
+                this.showPatientHome = false;
+                this.showPatientComponent = false;
+                this.showPatientRecord = true;
+            }
+            else{
+                this.showPatientHome = true;
+                this.showPatientComponent = false;
+            }
+
+            this.showProviderHome = true;
+            this.showProviderComponent = false;
+        }
+    }
+
+    handleBackFromSchedule(){
+        
     }
     
 }

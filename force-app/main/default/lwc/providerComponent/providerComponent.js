@@ -87,9 +87,17 @@ export default class ProviderComponent extends LightningElement {
 
     get optionsDistance(){
         return [
+            { label: '1 Miles Away', value: '1 Miles Away' },
+            { label: '3 Miles Away', value: '3 Miles Away' },
+            { label: '5 Miles Away', value: '5 Miles Away' },
             { label: '10 Miles Away', value: '10 Miles Away' },
+            { label: '15 Miles Away', value: '15 Miles Away' },
+            { label: '20 Miles Away', value: '20 Miles Away' },
             { label: '25 Miles Away', value: '25 Miles Away' },
+            { label: '30 Miles Away', value: '30 Miles Away' },
+            { label: '40 Miles Away', value: '40 Miles Away' },
             { label: '50 Miles Away', value: '50 Miles Away' },
+            { label: '75 Miles Away', value: '75 Miles Away' },
             { label: '100 Miles Away', value: '100 Miles Away' },
         ];
     }
@@ -133,6 +141,11 @@ export default class ProviderComponent extends LightningElement {
         });
 
 
+    }
+
+
+    handleBackPage(){
+        this.dispatchEvent(new CustomEvent('backagain'));
     }
 
 }

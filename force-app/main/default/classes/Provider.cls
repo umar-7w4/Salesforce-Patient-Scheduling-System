@@ -28,18 +28,17 @@ public class Provider {
             inNetwork +
             '\''
         : '');
-        
 
         condition += (startTime != null
         ? (String.isNotBlank(condition) ? +' OR ' : '') +
-            ' Start_Time__c >= ' +
-            startTime : '');
+            '( Start_Time__c >= ' +
+            startTime.formatGMT('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') : '');
+
 
         condition += (endTime != null
-        ? (String.isNotBlank(condition) ? +' OR ' : '') +
-            ' End_Time__c >= ' +
-            endTime : '');       
-
+        ? (String.isNotBlank(condition) ? +' AND ' : '') +
+            ' End_Time__c <= ' +
+            endTime.formatGMT('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') +' )' : '');       
 
         condition += (String.isNotBlank(taxonomy)
         ? (String.isNotBlank(condition) ? +' OR ' : '') +
@@ -76,7 +75,12 @@ public class Provider {
         System.debug(query);
         List<Provider__c> records = new List<Provider__c>();
         if(query != null){
-            records = Database.query(query);
+            try{
+                records = Database.query(query);
+            }
+            catch(Exception e){
+                System.debug(e.getMessage());
+            }
         }
         List<String> providerIds = new List<String>();
         if(records.size()>0){

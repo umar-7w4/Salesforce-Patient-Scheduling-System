@@ -79,6 +79,10 @@ export default class PatientComponent extends LightningElement {
         this.zipcode = event.detail.value;
     }
 
+    handleBackPage(){
+        this.dispatchEvent(new CustomEvent('back'));
+    }
+
     handleSubmit(event){
         var accName;
         if(this.lastName==undefined){
@@ -119,7 +123,6 @@ export default class PatientComponent extends LightningElement {
         });
         this.accountName = this.firstName+" "+this.lastName;
         //console.log(this.firstName+" "+this.lastName+" "+this.phone+" "+this.email+" "+this.ssn+" "+this.mrn+this.accountName);
-
 
     }
 

@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Providers" icon-name="custom:custom86" class="slds-border_bottom">
+        <lightning-button label="Choose Provider" onclick={handlePublish} slot="actions" class="slds-p-left_small"></lightning-button>
+        <div class="slds-card__body slds-card__body_inner">  {resultLength} Results</div>
+        <div class="slds-table_col-bordered slds-table_bordered" style="height: 500px;" >
+            <lightning-datatable key-field="id" 
+                    data={scheduleData}
+                    columns={columns}
+                    onrowselection={handleRowSelection}
+                    >                  
+            </lightning-datatable>
+       </div>
+      </lightning-card>
+</template>
