@@ -75,7 +75,7 @@
                                                 <div>
                                                     <p>Patient Birth Date</p>
                                                     <div>
-                                                        <p>{acc.Birth_Date__c}</p>
+                                                        <p><lightning-formatted-date-time  value={acc.Birth_Date__c} year="numeric" month="short" day="numeric"></lightning-formatted-date-time></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -250,7 +250,98 @@
                         </lightning-layout-item>
                     </template>
                     <template if:true={showScheduleRecord}>
+                        <lightning-layout-item padding="around-large" size="12" small-device-size="12" medium-device-size="12" large-device-size="4">
+                            <lightning-card title="Schedule" icon-name="standard:timeslot" class="my-card2">
+                                <lightning-button label="Change" slot="actions" onclick={handleScheduleChange}></lightning-button>
 
+                                <div class="slds-border_top"></div>
+                                <div class="slds-m-around_large">
+                                    <template for:each={schedleData} for:item="app">
+                                        <div class="slds-text-heading_small slds-p-bottom_small slds-p-top_small" key={app.Id}>
+                                            <strong><lightning-formatted-date-time value={app.Appointment_Start_Time__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time> - <lightning-formatted-date-time value={app.Appointment_End_Time__c} hour="2-digit" minute="2-digit"></lightning-formatted-date-time></strong>
+                                        </div>
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={app.Id} >
+                                            <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Appoitment Start Time</p>
+                                                    <div>
+                                                        <p><lightning-formatted-date-time value={app.Appointment_Start_Time__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Appoitment End Time</p>
+                                                    <div>
+                                                        <p><lightning-formatted-date-time value={app.Appointment_End_Time__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={app.Id} >
+                                            <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Provider Name</p>
+                                                    <div>
+                                                        {app.First_Name__c} {app.Last_Name__c}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Distance</p>
+                                                    <div>
+                                                        {app.Distance__c}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={app.Id} >
+                                            <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Appoitment Location</p>
+                                                    <div>
+                                                        {app.Location__c}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Appoitment Day</p>
+                                                    <div>
+                                                        {app.Days_of_the_week__c}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                    </template>
+                        
+                                    <template for:each={patientData} for:item="pat">
+                                        <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={pat.Id} >
+                                            <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient Name</p>
+                                                    <div>
+                                                        <p>{pat.Name}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                                                <div>
+                                                    <p>Patient MRN</p>
+                                                    <div>
+                                                        <p>{pat.MRN__c}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </lightning-card>
+                        </lightning-layout-item>
                     </template>
                 </lightning-layout>
             </lightning-card>
@@ -267,6 +358,7 @@
     </template>
 
     <template if:true={showScheduleComponent}>
-        <c-search-component onbackagain={handleBackFromSchedule}></c-search-component>
+        <c-search-component onscheduleback ={handleBackFromSchedule}></c-search-component>
+        <c-search-result onschedulechoosed ={handleScheduleChoosed} patientrecord={patientData}></c-search-result>
     </template>
 </template>

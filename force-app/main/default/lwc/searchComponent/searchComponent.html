@@ -1,55 +1,137 @@
 <template>
-    <div style="height: 400px;">
-        <lightning-card title="Schedule Search (Patient Centric)" icon-name="standard:search" class="slds-border_bottom">
-            <lightning-button label="Back to Home page" slot="actions" onclick={handleBackPage}></lightning-button>
-            <div class="slds-card__body slds-card__body_inner">   Input all the information and click search</div>
-            <div class="slds-border_top"></div>
-            <br>
-            <div class="slds-grid slds-wrap slds-var-p-horizontal_medium" >
+    <template if:true={switchToProviderCentric}>
+        <div style="height: 530px;">
+            <lightning-card title="Schedule Search (Provider Centric)" icon-name="standard:search" class="slds-border_bottom">
+                <lightning-button label="Back to Home page" slot="actions" onclick={handleBackPage}></lightning-button>
+                <lightning-button label="Switch to Patient Centric" slot="actions" onclick={handleSwitchToPatientCentric} class="slds-p-left_small"></lightning-button>
+                <div class="slds-card__body slds-card__body_inner">   Input all the information and click search</div>
+                <div class="slds-border_top"></div>
+                <br>
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium" >
 
-                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input label="Day of the Week" placeholder="Monday, Tuesday, Thursday" onchange={handleDayOfTheWeek} > </lightning-input>
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input label="Provider First name" placeholder="Provider first name" onchange={handleFirstName} > </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input label="Day of the Week" placeholder="Monday, Tuesday, Thursday" onchange={handleDayOfTheWeek} > </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-combobox
+                            name="Blocks of time"
+                            label="Blocks of time"
+                            placeholder="Select Blocks of time"
+                            options={optionsBlocksOfTime}
+                            onchange={handleBlocksOfTimeChange} >
+                        </lightning-combobox>
+                    </div>
+
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-textarea label="Provider Location" class="textAreaBody" placeholder="Enter complete location details" onchange={handleLocation}></lightning-textarea>
+                    </div>
+        
                 </div>
 
-                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input type="datetime" name="input1" label="Enter Start Time" onchange={handleStartTime}></lightning-input>
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium ">
+
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input label="Provider Last name" placeholder="Provider last name" onchange={handleLastName} > </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input type="datetime" name="input1" label="Enter Start Time" onchange={handleStartTime}></lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input type="datetime" name="input2" label="Enter End Time" onchange={handleEndTime} ></lightning-input>
+                    </div>
+
+                        
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-combobox
+                            name="Distance"
+                            label="Distance"
+                            value={valueDistance}
+                            placeholder="Select Distance"
+                            options={optionsDistance}
+                            onchange={handleDistanceChange} >
+                        </lightning-combobox>
+                    </div>
+                    
                 </div>
 
-                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input type="datetime" name="input2" label="Enter End Time" onchange={handleEndTime} ></lightning-input>
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium ">
+
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input label="Taxonomy" placeholder="Provider Taxonomy" onchange={handleTaxonomy} > </lightning-input>
+                    </div>
+
                 </div>
 
-                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-textarea label="Location" class="textAreaBody" placeholder="Enter complete location details" onchange={handleLocation}></lightning-textarea>
+
+                <br>
+                <footer class="slds-card__footer">
+                    <div class="slds-text-align_right">
+                        <lightning-button type="search" label="Search" onclick={handleSubmitForProviderCentric} variant="brand" ></lightning-button>  
+                    </div>  
+                </footer>
+        
+            </lightning-card>
+        </div>
+    </template>
+
+    <template if:false={switchToProviderCentric}>
+        <div style="height: 420px;">
+            <lightning-card title="Schedule Search (Patient Centric)" icon-name="standard:search" class="slds-border_bottom">
+                <lightning-button label="Back to Home page" slot="actions" onclick={handleBackPage}></lightning-button>
+                <lightning-button label="Switch to Provider Centric" slot="actions" onclick={handleSwitchToProviderCentric} class="slds-p-left_small"></lightning-button>
+                <div class="slds-card__body slds-card__body_inner">   Input all the information and click search</div>
+                <div class="slds-border_top"></div>
+                <br>
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium" >
+    
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input label="Day of the Week" placeholder="Monday, Tuesday, Thursday" onchange={handleDayOfTheWeek} > </lightning-input>
+                    </div>
+    
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input type="datetime" name="input1" label="Enter Start Time" onchange={handleStartTime}></lightning-input>
+                    </div>
+    
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-input type="datetime" name="input2" label="Enter End Time" onchange={handleEndTime} ></lightning-input>
+                    </div>
+    
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-textarea label="Location" class="textAreaBody" placeholder="Enter complete location details" onchange={handleLocation}></lightning-textarea>
+                    </div>
+        
+                </div>
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium ">
+    
+                    <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                        <lightning-combobox
+                            name="Distance"
+                            label="Distance"
+                            value={valueDistance}
+                            placeholder="Select Distance"
+                            options={optionsDistance}
+                            onchange={handleDistanceChange} >
+                        </lightning-combobox>
+                    </div>
+                    
                 </div>
     
-            </div>
-            <div class="slds-grid slds-wrap slds-var-p-horizontal_medium ">
-
-                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-combobox
-                        name="Distance"
-                        label="Distance"
-                        value={valueDistance}
-                        placeholder="Select Distance"
-                        options={optionsDistance}
-                        onchange={handleDistanceChange} >
-                    </lightning-combobox>
-                </div>
-                
-            </div>
-
-            <br>
-            <footer class="slds-card__footer">
-                <div class="slds-text-align_right">
-                    <lightning-button type="search" label="Search" onclick={handleSubmit} variant="brand" ></lightning-button>  
-                </div>  
-            </footer>
+                <br>
+                <footer class="slds-card__footer">
+                    <div class="slds-text-align_right">
+                        <lightning-button type="search" label="Search" onclick={handleSubmit} variant="brand" ></lightning-button>  
+                    </div>  
+                </footer>
+        
+            </lightning-card>
+        </div>
+    </template>
     
-        </lightning-card>
-    </div>
 </template>
-    
-    
-    
-    

@@ -1,14 +1,140 @@
 <template>
-    <lightning-card title="Providers" icon-name="custom:custom86" class="slds-border_bottom">
-        <lightning-button label="Choose Provider" onclick={handlePublish} slot="actions" class="slds-p-left_small"></lightning-button>
+    <lightning-card title="Schedules" icon-name="standard:timeslot" class="slds-border_bottom">
+        <lightning-button label="Choose Timeslot" 
+        disabled={chooseTimeSlot} onclick={handlePublish} slot="actions" class="slds-p-left_small"></lightning-button>
         <div class="slds-card__body slds-card__body_inner">  {resultLength} Results</div>
         <div class="slds-table_col-bordered slds-table_bordered" style="height: 500px;" >
             <lightning-datatable key-field="id" 
-                    data={scheduleData}
                     columns={columns}
+                    data={scheduleData}
                     onrowselection={handleRowSelection}
+                    max-row-selection=1
                     >                  
             </lightning-datatable>
        </div>
       </lightning-card>
+
+      <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+        <!-- modal header start -->
+        <header class="slds-modal__header">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                <lightning-icon icon-name="utility:close"
+                    alternative-text="close"
+                    variant="inverse"
+                    size="small" ></lightning-icon>
+                <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Encounter</h2>
+            <p class="slds-align_absolute-center">Time Slots(s)</p>
+        </header>
+
+        <!-- modal body start -->
+
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+            <div class="slds-align_absolute-center slds-text-heading_medium">
+                Schedule Encounter
+            </div>
+            <div class="slds-align_absolute-center">
+                <p>Encounter Time slots will be released in 5 minutes</p>
+            </div>
+            <br>
+            <br>
+            <template for:each={scheduleDT} for:item="app">
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={app.Id} >
+                    <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                        <div>
+                            <p>Appoitment Start Time</p>
+                            <div>
+                                <p><lightning-formatted-date-time value={app.Appointment_Start_Time__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                        <div>
+                            <p>Appoitment End Time</p>
+                            <div>
+                                <p><lightning-formatted-date-time value={app.Appointment_End_Time__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={app.Id} >
+                    <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                        <div>
+                            <p>Provider Name</p>
+                            <div>
+                                {app.First_Name__c} {app.Last_Name__c}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                        <div>
+                            <p>Distance</p>
+                            <div>
+                                {app.Distance__c}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={app.Id} >
+                    <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                        <div>
+                            <p>Appoitment Location</p>
+                            <div>
+                                {app.Location__c}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                        <div>
+                            <p>Appoitment Day</p>
+                            <div>
+                                {app.Days_of_the_week__c}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </template>
+
+            <template for:each={patientDisplay} for:item="pat">
+                <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " key={pat.Id} >
+                    <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                        <div>
+                            <p>Patient Name</p>
+                            <div>
+                                <p>{pat.Name}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size--12-of-12 slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12 slds-p-around_xx-small">
+                        <div>
+                            <p>Patient MRN</p>
+                            <div>
+                                <p>{pat.MRN__c}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+
+        <!-- modal footer start-->
+
+        <footer class="slds-modal__footer">
+            <lightning-button type="cancel"  onclick={hideModalBox} label="Cancel" ></lightning-button> 
+            <lightning-button type="submit" label="Confirm" onclick={handleSubmit} variant="brand" class="slds-p-left_small"></lightning-button> 
+        </footer>
+
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+      
 </template>

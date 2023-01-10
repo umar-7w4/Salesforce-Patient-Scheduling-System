@@ -1,8 +1,12 @@
 import { LightningElement, api, wire, track  } from 'lwc';
 import Account from '@salesforce/schema/Account';
-import Apex_Method_One_Ref from "@salesforce/apex/Patient.getPatientDetails";
+
+//Importing get patient details apex method from patient apex class
+import GETPATIENTRESULTS from "@salesforce/apex/Patient.getPatientDetails";
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { publish, MessageContext } from 'lightning/messageService';
+
+//Importing data channel for publishing searched records from patient component to patient result component
 import dataChannel from '@salesforce/messageChannel/DataChannel__c';
 
 export default class PatientComponent extends LightningElement {
@@ -14,7 +18,9 @@ export default class PatientComponent extends LightningElement {
 
     @api accounts = [];
 
+    //Stores length of search results records 
     resultLength = 0;
+    //Stores patient full name inside this fields
     @api accountName;
     @api firstName;
     @api lastName;
@@ -83,6 +89,9 @@ export default class PatientComponent extends LightningElement {
         this.dispatchEvent(new CustomEvent('back'));
     }
 
+    /*This method calls method inside patient apex class and gets the all patient records based on 
+    search criteria and also publishes the data via data channel to patient result component. */
+
     handleSubmit(event){
         var accName;
         if(this.lastName==undefined){
@@ -91,7 +100,7 @@ export default class PatientComponent extends LightningElement {
         else{
             accName = this.firstName+" "+this.lastName;
         }
-        Apex_Method_One_Ref({ 
+        GETPATIENTRESULTS({ 
             firstName : this.firstName,
             lastName : this.lastName,
             phone : this.phone, 
@@ -108,11 +117,11 @@ export default class PatientComponent extends LightningElement {
         .then(result => {
             this.accounts = result;
             this.resultLength = this.accounts.length;
-            //console.log(this.accounts);
             console.log(this.dateofBirth+" "+this.ssn+" "+this.country+" "+this.city+" "+this.state+" "+this.street+" "+this.zipcode);
 
             this.dispatchEvent(event);
 
+            //Publishing patient records to patient result component
             const payload = { data: this.accounts };
             publish(this.messageContext, dataChannel, payload);
             console.log("Payload"+payload);
@@ -122,7 +131,6 @@ export default class PatientComponent extends LightningElement {
             this.dispatchEvent(event);
         });
         this.accountName = this.firstName+" "+this.lastName;
-        //console.log(this.firstName+" "+this.lastName+" "+this.phone+" "+this.email+" "+this.ssn+" "+this.mrn+this.accountName);
 
     }
 

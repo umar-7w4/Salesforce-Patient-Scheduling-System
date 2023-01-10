@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 590px;">
+    <div style="height: 570px;">
         <lightning-card title="Provider Search" icon-name="standard:search" class="slds-border_bottom">
             <lightning-button label="Back to Home page" slot="actions" onclick={handleBackPage}></lightning-button>
             <div class="slds-card__body slds-card__body_inner">   Input all the information and click search</div>
@@ -45,14 +45,6 @@
                 </div>
 
                 <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input type="datetime" name="input1" label="Enter Start Time" onchange={handleStartTime}></lightning-input>
-                </div>
-
-                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input type="datetime" name="input2" label="Enter End Time" onchange={handleEndTime} ></lightning-input>
-                </div>
-
-                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
                     <lightning-combobox
                         name="Distance"
                         label="Distance"
@@ -63,6 +55,9 @@
                     </lightning-combobox>
                 </div>
                 
+                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
+                    <lightning-input label="Speciality" placeholder="Provider speciality" onchange={handleSpeciality} > </lightning-input>
+                </div>
                 
             </div>
     
@@ -70,11 +65,6 @@
 
                 <div class="slds-col slds-size_4-of-12 slds-p-around_small">
                     <lightning-textarea label="Location" class="textAreaBody" placeholder="Enter complete location details" onchange={handleLocation}></lightning-textarea>
-                </div>
-
-
-                <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                    <lightning-input label="Speciality" placeholder="Provider speciality" onchange={handleSpeciality} > </lightning-input>
                 </div>
 
             </div>

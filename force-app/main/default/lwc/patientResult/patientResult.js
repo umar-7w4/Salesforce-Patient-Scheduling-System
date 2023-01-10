@@ -5,8 +5,11 @@ import { refreshApex } from '@salesforce/apex';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { publish } from 'lightning/messageService';
+
+//Importing create patient method from Patient apex class 
 import CREATEACCOUNT from "@salesforce/apex/Patient.createPatient";
 
+//Importing all patient related fields from Account
 import NAME from '@salesforce/schema/Account.Name';
 import LASTNAME_FIELD from '@salesforce/schema/Account.LastName';
 import PHONE_FIELD from '@salesforce/schema/Account.Phone';
@@ -21,6 +24,7 @@ import ZIPCODE from '@salesforce/schema/Account.BillingPostalCode';
 import BIRTHDAY from '@salesforce/schema/Account.Birth_Date__c';
 
 import ID_FIELD from '@salesforce/schema/Account.Id';
+//Importing data channel for subscribing searched records from patient component.
 import dataChannel from '@salesforce/messageChannel/DataChannel__c';
 import {
     subscribe,
@@ -60,6 +64,12 @@ const COLS = [
     { 
         label: 'Birthday', 
         fieldName: BIRTHDAY.fieldApiName, 
+        type: 'date', 
+        typeAttributes: {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+          },
         editable: true 
     },
     { 
@@ -99,14 +109,24 @@ export default class PatientResult extends LightningElement {
     @wire(MessageContext)
     messageContext2;
 
+    //Stores length of search results records 
     resultLength = 0;
+
+    //Stores all patient records recieved from patient component
     accountData = [];
+
+    //Stores selected patient record 
     patientsDT = [];
+
+    //Stores all column fields that will be displayed inside data table
     columns = COLS;
     subscription = null;
+
+    //Boolean value to show new patient modal conditionally
     isShowModal = false;
     showResult = true;
 
+    //Stores patient full name inside this fields
     @api accountName;
     @api firstName;
     @api lastName;
@@ -171,6 +191,9 @@ export default class PatientResult extends LightningElement {
         this.zipcode = event.detail.value;
     }
 
+    /*This method calls method inside patient apex class and creates new patient record with all fields given
+     inside the input fields. And also publishes choosed patient record to home page via custom event */
+
     handleSubmit(event){
         var accName;
         if(this.lastName==undefined){
@@ -198,6 +221,7 @@ export default class PatientResult extends LightningElement {
             console.log(result);
             this.patientsDT.push(result);
 
+            //Publishing choosed patient record to home component via custom event
             const selectedEvent = new CustomEvent('choosed', { detail: this.patientsDT });
             this.dispatchEvent(selectedEvent);
         })
@@ -218,6 +242,7 @@ export default class PatientResult extends LightningElement {
         this.subscribeToMessageChannel();
     }
 
+    //Subscribes the data from patient component  
     subscribeToMessageChannel() {
         if (!this.subscription) {
             this.subscription = subscribe(
@@ -237,6 +262,7 @@ export default class PatientResult extends LightningElement {
         this.unsubscribeToMessageChannel();
     }
     
+    //Stores the subscribed data inside the array
     handleMessage(message) {
         this.accountData = message.data;
         this.resultLength = this.accountData.length;
@@ -244,6 +270,7 @@ export default class PatientResult extends LightningElement {
         //this.unsubscribeToMessageChannel();
     }
 
+    //Stores selected patient record inside the array 
     handleRowSelection = event => {
         const  selectedRows = event.detail.selectedRows;
         console.log(selectedRows);
@@ -252,22 +279,23 @@ export default class PatientResult extends LightningElement {
         console.log(this.patientsDT);
    }
 
-    handlePublish(){
+
+    handlePublish(event){
         if(this.patientsDT.length>0){
             const payload = { data: this.patientsDT };
             publish(this.messageContext, dataChannel, payload);
-            console.log('payload');
-            console.log(payload);
 
             const selectedEvent = new CustomEvent('choosed', { detail: this.patientsDT });
             this.dispatchEvent(selectedEvent);
         }
     }
 
+    //Displays modal for new patient on clicking new patient button
     handleModal(){
         this.isShowModal = true;
     }
 
+    //Closes modal on clicking cancel button
     hideModalBox() {  
         this.isShowModal = false;
     }
