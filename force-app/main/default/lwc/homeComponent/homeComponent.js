@@ -1,3 +1,8 @@
+/*
+@description: This Lightning web component is a home component for patient, provider, and scheduling. 
+              This component also displayed choosed record for the patient, provider, and scheduling
+*/
+
 import { LightningElement, api } from 'lwc';
 import PATIENT from '@salesforce/resourceUrl/HealthPatient';
 import PROVIDER from '@salesforce/resourceUrl/HealthProvider';

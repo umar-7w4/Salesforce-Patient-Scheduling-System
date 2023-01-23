@@ -1,3 +1,7 @@
+/*
+@description: This Lightning web component displays searched records of patient component. 
+*/
+
 import { LightningElement, wire, api, track } from 'lwc';
 
 import getAccounts from '@salesforce/apex/Patient.getPatientDetails';

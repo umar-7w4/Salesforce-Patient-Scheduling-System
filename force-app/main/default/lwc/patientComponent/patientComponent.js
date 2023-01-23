@@ -1,3 +1,7 @@
+/*
+@description: This Lightning web component takes various input values of patient and fetches records. 
+*/
+
 import { LightningElement, api, wire, track  } from 'lwc';
 import Account from '@salesforce/schema/Account';
 

@@ -1,0 +1,89 @@
+<template>
+    <div class="slds-card_boundary">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning-icon size="small" icon-name="standard:shift_pattern_entry" alternative-text="Railcars" title="Railcars"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <span class="slds-page-header__title slds-truncate heading" > Conditions ({size})</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>
+        
+        <template if:true={size}>
+        <div class="slds-scrollable" >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Example default base table of Opportunities">
+                <thead class="slds-card_boundary">
+                <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Name">Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Patient">Patient</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Stage">Stage</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Condition Code">Condition Code</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Severity">Severity</div>
+                </th>
+
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Type">Type</div>
+                </th>
+
+                </tr>
+                </thead>
+                <template for:each={rails} for:item="rail">
+                <tbody key={rail.Id}>
+                <tr class="slds-hint-parent">
+                <th data-label="Opportunity Name" scope="row">
+                <div class="slds-truncate">
+                <a data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1" data-id={rail.Id}>{rail.Name}</a>
+                </div>
+                </th>
+                <td data-label="Condition Code">
+                    <div class="slds-truncate">{rail.Account__r.Name}</div>
+                </td>
+                <td data-label="Stage">
+                <div class="slds-truncate">{rail.Stage__c}</div>
+                </td>
+                <td data-label="Condition Code">
+                    <div class="slds-truncate">{rail.Condition_Code__c}</div>
+                    </td>
+                <td data-label="Severity">
+                <div class="slds-truncate">{rail.Severity__c}</div>
+                </td>
+
+                <td data-label="Severity">
+                    <div class="slds-truncate">{rail.Type__c}</div>
+                </td>
+
+
+                </tr>
+                </tbody>
+            </template>
+                </table>
+        </div>
+        
+        </template>
+        <template if:true={showViewAll}>
+        <div align="center"> 
+            <lightning-button variant="base" label="View All" title="View All" onclick={handleClick} class="slds-var-m-left_x-small"></lightning-button>
+        </div>
+    </template>
+    </div>
+   
+</template>

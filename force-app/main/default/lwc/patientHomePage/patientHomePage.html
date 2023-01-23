@@ -1,0 +1,152 @@
+
+<template>
+    <div>
+        <lightning-card title="Patient Search" icon-name="standard:search" class="slds-border_bottom">
+            <table>
+                <tr>
+                    <td class="slds-p-horizontal_medium">
+                        <lightning-input label="Name" placeholder="Patient name" onchange={handleName} > </lightning-input>
+                    </td>
+                    <td class="slds-p-horizontal_medium">
+                        <lightning-input label="SSN" placeholder="Patient SSN" onchange={handleSSNChange} > </lightning-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="slds-p-horizontal_medium">
+                        <lightning-input label="Phone" placeholder="Patient phone" onchange={handlePhoneChange} > </lightning-input>
+                    </td>
+                    <td class="slds-p-horizontal_medium">
+                        <lightning-input label="Email" placeholder="Patient email" onchange={handleEmailChange} > </lightning-input>
+                    </td>
+                </tr>
+            </table>
+            <div class="slds-text-align_right slds-p-top_x-small slds-p-right_x-small">
+                <lightning-button type="search" label="Search" onclick={handleSubmit} variant="brand" ></lightning-button>  
+            </div>  
+    
+        </lightning-card>
+    </div>
+    <template if:true={resultLength}>
+        <div class="slds-scrollable" >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead class="slds-card_boundary">
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Phone">Phone</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Email">Email</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="SSN">SSN</div>
+                        </th>
+                        <!-- 
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Country">Country</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="State">State</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="City">City</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Street">Street</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Race">Race</div>
+                        </th> -->
+                    </tr>
+                </thead>
+                <template for:each={limitedAccounts} for:item="acc">
+                    <tbody key={acc.Id}>
+                        <tr class="slds-hint-parent">
+                            <th data-label="Patient Name" scope="row">
+                                <div class="slds-truncate">
+                                    <a data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1" data-id={acc.Id}>{acc.Name}</a>
+                                </div>
+                            </th>
+                            <td data-label="Phone">
+                                <div class="slds-truncate">{acc.PersonMobilePhone}</div>
+                            </td>
+                            <td data-label="Email">
+                                <div class="slds-truncate">{acc.PersonEmail}</div>
+                            </td>
+                            <td data-label="SSN">
+                                <div class="slds-truncate">{acc.SSN__pc}</div>
+                            </td>
+                            <!-- 
+                            <td data-label="Country">
+                                <div class="slds-truncate">{acc.BillingCountry}</div>
+                            </td>
+                            <td data-label="State">
+                                <div class="slds-truncate">{acc.BillingState}</div>
+                            </td>
+                            <td data-label="City">
+                                <div class="slds-truncate">{acc.BillingCity}</div>
+                            </td>
+                            <td data-label="Street">
+                                <div class="slds-truncate">{acc.BillingStreet}</div>
+                            </td>
+                            <td data-label="Race">
+                                <div class="slds-truncate">{acc.Race__pc}</div>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </template>
+            </table>
+            <div align="center" style="background-color: white;"> 
+                <lightning-button variant="base" label="View All" title="View All" onclick={handleClick} class="slds-var-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+    </template>
+    <template if:true={expand}>
+        <div class="slds-scrollable" >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead class="slds-card_boundary">
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Phone">Phone</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Email">Email</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="SSN">SSN</div>
+                        </th>
+                    </tr>
+                </thead>
+                <template for:each={accounts} for:item="acc">
+                    <tbody key={acc.Id}>
+                        <tr class="slds-hint-parent">
+                            <th data-label="Patient Name" scope="row">
+                                <div class="slds-truncate">
+                                    <a data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1" data-id={acc.Id}>{acc.Name}</a>
+                                </div>
+                            </th>
+                            <td data-label="Phone">
+                                <div class="slds-truncate">{acc.PersonMobilePhone}</div>
+                            </td>
+                            <td data-label="Email">
+                                <div class="slds-truncate">{acc.PersonEmail}</div>
+                            </td>
+                            <td data-label="SSN">
+                                <div class="slds-truncate">{acc.SSN__pc}</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </table>
+        </div>
+    </template>
+</template>
+    
+    
+    
+    
