@@ -1,0 +1,164 @@
+<template>
+    <div class="slds-card_boundary">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning-icon size="small" icon-name="standard:shift_pattern_entry" alternative-text="Railcars" title="Railcars"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-float_right">
+                            <lightning-button variant="neutral" label="Add Campaign Member" title="Add Campaign Member" onclick={handleClick} ></lightning-button>
+                        </div>
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <span class="slds-page-header__title slds-truncate heading"> Campaign Members ({size})</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>
+        
+        <template if:true={size}>
+        <div class="slds-scrollable" >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Example default base table of Opportunities">
+                <thead class="slds-card_boundary">
+                <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Name">Name</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Patient">Campaign Name</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Stage">Status</div>
+                </th>
+                <th class="" scope="col">
+                <div class="slds-truncate" title="Condition Code">Patient</div>
+                </th>
+
+                </tr>
+                </thead>
+                <template for:each={rails} for:item="rail">
+                <tbody key={rail.Id}>
+                <tr class="slds-hint-parent">
+                <th data-label="Opportunity Name" scope="row">
+                <div class="slds-truncate">
+                <a data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1" data-id={rail.Id}>{rail.Name}</a>
+                </div>
+                </th>
+                <td data-label="Campaign Name">
+                    <div class="slds-truncate">{rail.Campaign.Name}</div>
+                </td>
+                <td data-label="Stage">
+                <div class="slds-truncate">{rail.Status}</div>
+                </td>
+                <td data-label="Condition Code">
+                    <div class="slds-truncate">{rail.HealthCloudGA__Account__r.Name}</div>
+                </td>
+
+                </tr>
+                </tbody>
+            </template>
+                </table>
+        </div>
+        
+        </template>
+        <div align="center" class="slds-p-around_xx-small"> 
+            <lightning-button variant="base" label="View All" title="View All" onclick={handleClick} class="slds-var-m-left_x-small"></lightning-button>
+        </div>
+    </div>
+   
+    <template if:true={showModal}>
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+            <!-- modal header start -->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Add To Campaign</h2>
+            </header>
+    
+            <!-- modal body start -->
+
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                    <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+        
+                        <div class="slds-col slds-size_6-of-12 slds-p-around_large">
+                            <c-lwc-lookup-component
+                            name="campaignLookup"
+                            field-label="Campaign"
+                            child-object-api-name="CampaignMember"
+                            target-field-api-name="CampaignId"
+                            value={CampaignId}
+                            required="false"
+                            add-to-recent="true"
+                            onvalueselected={handleSelectedLookup2}
+                    >
+                    </c-lwc-lookup-component>
+                        </div>
+        
+                        <div class="slds-col slds-size_6-of-12 slds-p-around_large">
+                            <lightning-combobox
+                                name="Member Status"
+                                label="Member Status"
+                                placeholder="Select Status"
+                                options={statusValues}
+                                onchange={handleStatus} >
+                            </lightning-combobox>
+                        </div>
+                    </div>
+        
+                    <div class="slds-grid slds-wrap slds-var-p-horizontal_medium " >
+        
+                        <div class="slds-col slds-size_6-of-12 slds-p-around_large">
+                            <c-lwc-lookup-component
+                                    name="accountLookup"
+                                    field-label="Patient"
+                                    child-object-api-name="CampaignMember"
+                                    target-field-api-name="HealthCloudGA__Account__c"
+                                    value={accountId}
+                                    required="false"
+                                    add-to-recent="true"
+                                    onvalueselected={handleSelectedLookup}
+                            >
+                            </c-lwc-lookup-component>
+                        </div>
+        
+                        <!-- 
+                        <div class="slds-col slds-size_6-of-12 slds-p-around_large">
+                            <lightning-radio-group name="radioGroup"
+                                label="Update existing campaign members?"
+                                options={options}
+                                value={value}
+                                type="radio"
+                                onchange={handleUpdateDecision}>   
+                            </lightning-radio-group>
+                        </div>
+                        -->
+                    </div>
+
+                
+            </div>
+
+            <!-- modal footer start-->
+            <footer class="slds-modal__footer">
+                <lightning-button type="cancel"  onclick={hideModalBox} label="Cancel" ></lightning-button> 
+                <lightning-button type="submit" label="Save" onclick={handleSubmit} variant="brand" class="slds-p-left_small"></lightning-button> 
+            </footer>                        
+                            
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

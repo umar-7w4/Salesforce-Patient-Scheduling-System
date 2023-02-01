@@ -144,8 +144,14 @@ export default class SearchResult extends LightningElement {
         this.resultLength = this.scheduleData.length;
         console.log("Schedule data : "+this.scheduleData);
         this.returnedOppo = this.scheduleData;
-        this.renderFullCalender();
-        this.alreadyRendered = true; 
+        if(this.scheduleData.length==0){
+            this.alreadyRendered = false; 
+            this.handleListView();
+        }
+        else{
+            this.renderFullCalender();
+            this.alreadyRendered = true;      
+        }
     }
 
     handleRowSelection = event => {
@@ -193,8 +199,10 @@ export default class SearchResult extends LightningElement {
 
     handleListView(){
         this.listView = true;
-        this.initialiseFullCalendarJs();
-        this.renderFullCalender();
+        if(this.scheduleData.length>0){
+            this.initialiseFullCalendarJs();
+            this.renderFullCalender();
+        }
     }
 
     stopRendering = false;
@@ -222,10 +230,6 @@ export default class SearchResult extends LightningElement {
             });
         })
     }
-
-    //renderedCallback() {
-
-    //}
 
     initialiseFullCalendarJs() {
 

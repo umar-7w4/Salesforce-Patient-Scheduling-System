@@ -1,6 +1,6 @@
 import { wire, api, LightningElement, track } from 'lwc';
-import fetchConditions from '@salesforce/apex/PatientRelatedListClass.getConditions';
-import fetchObjectName from '@salesforce/apex/RailcarRelatedListHelper.fetchObjectName';
+import fetchCampaignMemebers from '@salesforce/apex/CampaignMembers.getCampaignMembers';
+import fetchObjectName from '@salesforce/apex/CampaignMembers.fetchObjectName';
 import { CurrentPageReference ,NavigationMixin} from 'lightning/navigation';
 export default class PatientRelatedListTab extends NavigationMixin(LightningElement) {
     
@@ -37,25 +37,38 @@ isAccountRelated
 
     }
     //wire function to fetch the related railcar records               
-    @wire(fetchRailcars,{recId:'$id'})
-    wiredAccounts({ error, data }) 
-    {
-        if (data)
-        {
+    @wire(fetchCampaignMemebers,{recId:'$id'})
+    wiredAccounts({ error, data }) {
+        console.log('Heyyyyy man');
+        if (data) {
             this.railcars = JSON.parse( JSON.stringify( data ) );
             this.size=this.railcars.length;
-            //logic for converting the Arrival Date in US locale
-            for(var i=0;i< this.railcars.length;i++)
+            console.log(this.railcars);
+            console.log(this.size);
+            console.log(this.recordId);
+            //logic to decide whether to show view All button or not
+            if(this.size>5)
             {
-                let dt = new Date(this.railcars[i].Arrival_Date__c);
-                this.railcars[i].Arrival_Date__c = new Intl.DateTimeFormat('en-US' ).format( dt );
+                this.showViewAll=true;
+            }
+            console.log(this.railcars);
+            if(this.size>5)
+            {
+                this.rails=[this.railcars[0] , this.railcars[1], this.railcars[2], this.railcars[3], this.railcars[4]];
+            }
+            else{
+                this.rails=[...this.railcars];
             }
         } 
-        else if (error)
-        {
-                this.error = error;
+        else if (error) {
+            console.log('Error');
+            console.log(error);
+            this.error = error;
         }
     }
+
+
+
 //Logic to Navigate to Railcar Record Detail page on click of the Railcar Number link on the component 
     navigateDetails(event)
         {
@@ -65,12 +78,6 @@ isAccountRelated
             this.objName='';
             if(this.navToId.startsWith('001')){
                 this.objName='Account';
-            }
-            else if(this.navToId.startsWith('801')){
-                this.objName='Order';
-            }
-            else{
-                this.objName='Railcar__c';
             }
             //window.close();
             console.log(this.objName);
@@ -87,4 +94,6 @@ isAccountRelated
 
                     
         }
+
+
 }

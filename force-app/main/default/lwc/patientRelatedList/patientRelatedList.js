@@ -110,7 +110,7 @@ export default class PatientRelatedList extends NavigationMixin(LightningElement
     }*/
 
     //logic to handle navigation functionality when clicking view all button
-    /*
+    
 
     //Logic to Navigate to Railcar Record Detail page on click of the Railcar Number link on the component 
     navigateDetails(event){
@@ -126,19 +126,5 @@ export default class PatientRelatedList extends NavigationMixin(LightningElement
         });
     }
 
-    handleClick()
-        {
-            this[NavigationMixin.Navigate]({
-                    type:'standard__navItemPage',
-                    attributes: 
-                    {
-                        apiName: 'RelatedRailcars',  
-                    },
-                    state:
-                    {
-                        c__id:this.recordId
-                    }
-                });
-        }*/
     
 }

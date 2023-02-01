@@ -12,7 +12,7 @@ public with sharing class Appointment {
     If none of the field matches it then returns all records with limit of 200
     */
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<Appointment__c> getAppointments(String dayOfTheWeek, DateTime startTime, DateTime endTime, String distance, String location){
 
         String query;

@@ -19,6 +19,11 @@
                         <lightning-input label="Email" placeholder="Patient email" onchange={handleEmailChange} > </lightning-input>
                     </td>
                 </tr>
+                <tr>
+                    <td class="slds-p-horizontal_medium">
+                        <lightning-input type="date" label="Birth Date" date-style="long" placeholder="Patient date of birth (MMM DD, YYYY)" onchange={handleDateChange}></lightning-input>
+                    </td>
+                </tr>
             </table>
             <div class="slds-text-align_right slds-p-top_x-small slds-p-right_x-small">
                 <lightning-button type="search" label="Search" onclick={handleSubmit} variant="brand" ></lightning-button>  
@@ -43,30 +48,17 @@
                         <th class="" scope="col">
                             <div class="slds-truncate" title="SSN">SSN</div>
                         </th>
-                        <!-- 
                         <th class="" scope="col">
-                            <div class="slds-truncate" title="Country">Country</div>
+                            <div class="slds-truncate" title="Birth Date">Birth Date</div>
                         </th>
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="State">State</div>
-                        </th>
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="City">City</div>
-                        </th>
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Street">Street</div>
-                        </th>
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Race">Race</div>
-                        </th> -->
                     </tr>
                 </thead>
                 <template for:each={limitedAccounts} for:item="acc">
                     <tbody key={acc.Id}>
                         <tr class="slds-hint-parent">
                             <th data-label="Patient Name" scope="row">
-                                <div class="slds-truncate">
-                                    <a data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1" data-id={acc.Id}>{acc.Name}</a>
+                                <div>
+                                    <a  onclick={handleClickNavigate} tabindex="-1" data-record-id={acc.Id}>{acc.Name}</a>
                                 </div>
                             </th>
                             <td data-label="Phone">
@@ -78,22 +70,9 @@
                             <td data-label="SSN">
                                 <div class="slds-truncate">{acc.SSN__pc}</div>
                             </td>
-                            <!-- 
-                            <td data-label="Country">
-                                <div class="slds-truncate">{acc.BillingCountry}</div>
+                            <td data-label="Birth Date">
+                                <div class="slds-truncate">{acc.HealthCloudGA__BirthDate__pc}</div>
                             </td>
-                            <td data-label="State">
-                                <div class="slds-truncate">{acc.BillingState}</div>
-                            </td>
-                            <td data-label="City">
-                                <div class="slds-truncate">{acc.BillingCity}</div>
-                            </td>
-                            <td data-label="Street">
-                                <div class="slds-truncate">{acc.BillingStreet}</div>
-                            </td>
-                            <td data-label="Race">
-                                <div class="slds-truncate">{acc.Race__pc}</div>
-                            </td> -->
                         </tr>
                     </tbody>
                 </template>
@@ -120,6 +99,9 @@
                         <th class="" scope="col">
                             <div class="slds-truncate" title="SSN">SSN</div>
                         </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Birth Date">Birth Date</div>
+                        </th>
                     </tr>
                 </thead>
                 <template for:each={accounts} for:item="acc">
@@ -127,7 +109,7 @@
                         <tr class="slds-hint-parent">
                             <th data-label="Patient Name" scope="row">
                                 <div class="slds-truncate">
-                                    <a data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1" data-id={acc.Id}>{acc.Name}</a>
+                                    <a onclick={handleClickNavigate} tabindex="-1" data-record-id={acc.Id}>{acc.Name}</a>
                                 </div>
                             </th>
                             <td data-label="Phone">
@@ -138,6 +120,9 @@
                             </td>
                             <td data-label="SSN">
                                 <div class="slds-truncate">{acc.SSN__pc}</div>
+                            </td>
+                            <td data-label="Birth Date">
+                                <div class="slds-truncate">{acc.HealthCloudGA__BirthDate__pc}</div>
                             </td>
                         </tr>
                     </tbody>

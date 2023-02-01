@@ -14,7 +14,13 @@
                     </div>
 
                     <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                        <lightning-input label="Day of the Week" placeholder="Monday, Tuesday, Thursday" onchange={handleDayOfTheWeek} > </lightning-input>
+                        <lightning-combobox
+                            name="Day of the Week"
+                            label="Day of the Week"
+                            placeholder="Monday, Tuesday, Thursday"
+                            options={days}
+                            onchange={handleDayOfTheWeek} >
+                        </lightning-combobox>
                     </div>
 
                     <div class="slds-col slds-size_3-of-12 slds-p-around_small">
@@ -92,7 +98,13 @@
                 <div class="slds-grid slds-wrap slds-var-p-horizontal_medium" >
     
                     <div class="slds-col slds-size_3-of-12 slds-p-around_small">
-                        <lightning-input label="Day of the Week" placeholder="Monday, Tuesday, Thursday" onchange={handleDayOfTheWeek} > </lightning-input>
+                        <lightning-combobox
+                            name="Day of the Week"
+                            label="Day of the Week"
+                            placeholder="Monday, Tuesday, Thursday"
+                            options={days}
+                            onchange={handleDayOfTheWeek} >
+                        </lightning-combobox>
                     </div>
     
                     <div class="slds-col slds-size_3-of-12 slds-p-around_small">

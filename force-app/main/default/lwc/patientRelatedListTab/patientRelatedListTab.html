@@ -12,16 +12,6 @@
                         </li>
                     </ol>
                 </template>
-                <template if:false={isAccountRelated}>
-                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
-                        <li class="slds-breadcrumb__item slds-line-height_reset">
-                            <a title="Accounts" href="/lightning/o/Order/home">Orders</a>
-                        </li>
-                        <li class="slds-breadcrumb__item slds-line-height_reset">
-                            <a title={recordName} data-id={id} data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1"><b>{recordName}</b></a>
-                        </li>
-                    </ol>
-                </template>
             </div>
             <div class="slds-page-header__row">
             <div class="slds-page-header__col-title">
@@ -41,63 +31,48 @@
             </div>
         </div>
         <template if:true={size}>
-        <div class="slds-scrollable" >
-            <table class="slds-table slds-table_cell-buffer slds-table_bordered" >
-                <thead class="slds-card_boundary">
-                <tr class="slds-line-height_reset">
-
+            <div class="slds-scrollable" >
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="Example default base table of Opportunities">
+                    <thead class="slds-card_boundary">
+                    <tr class="slds-line-height_reset">
                     <th class="" scope="col">
-                        <div class="slds-truncate" title="Name">Name</div>
-                        </th>
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Patient">Patient</div>
-                        </th>
-                        <th class="" scope="col">
-                        <div class="slds-truncate" title="Stage">Stage</div>
-                        </th>
-                        <th class="" scope="col">
-                        <div class="slds-truncate" title="Condition Code">Condition Code</div>
-                        </th>
-                        <th class="" scope="col">
-                        <div class="slds-truncate" title="Severity">Severity</div>
-                        </th>
-        
-                        <th class="" scope="col">
-                            <div class="slds-truncate" title="Type">Type</div>
-                        </th>
-                </tr>
-                </thead>
-                <template for:each={railcars} for:item="rail">
-                <tbody key={rail.Id}>
-                <tr class="slds-hint-parent">
-                <th data-label="Opportunity Name" scope="row">
-                <div class="slds-truncate">
-                <a data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1" data-id={rail.Id}>{rail.Name}</a>
-                </div>
-                </th>
-                <td data-label="Condition Code">
-                    <div class="slds-truncate">{rail.Account__r.Name}</div>
-                </td>
-                <td data-label="Stage">
-                <div class="slds-truncate">{rail.Stage__c}</div>
-                </td>
-                <td data-label="Condition Code">
-                    <div class="slds-truncate">{rail.Condition_Code__c}</div>
+                    <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Patient">Campaign Name</div>
+                    </th>
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="Stage">Status</div>
+                    </th>
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="Condition Code">Patient</div>
+                    </th>
+    
+                    </tr>
+                    </thead>
+                    <template for:each={rails} for:item="rail">
+                    <tbody key={rail.Id}>
+                    <tr class="slds-hint-parent">
+                    <th data-label="Opportunity Name" scope="row">
+                    <div class="slds-truncate">
+                    <a data-navigable="true"  target="_blank" onclick={navigateDetails} tabindex="-1" data-id={rail.Id}>{rail.Name}</a>
+                    </div>
+                    </th>
+                    <td data-label="Campaign Name">
+                        <div class="slds-truncate">{rail.Campaign.Name}</div>
                     </td>
-                <td data-label="Severity">
-                <div class="slds-truncate">{rail.Severity__c}</div>
-                </td>
-
-                <td data-label="Severity">
-                    <div class="slds-truncate">{rail.Type__c}</div>
-                </td>
-
-                </tr>
-                </tbody>
-            </template>
-                </table>
-        </div>
-        
+                    <td data-label="Stage">
+                    <div class="slds-truncate">{rail.Status}</div>
+                    </td>
+                    <td data-label="Condition Code">
+                        <div class="slds-truncate">{rail.HealthCloudGA__Account__r.Name}</div>
+                    </td>
+    
+                    </tr>
+                    </tbody>
+                </template>
+                    </table>
+            </div>
         </template>
         
     </div>

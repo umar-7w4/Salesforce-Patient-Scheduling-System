@@ -13,7 +13,7 @@ public class Patient {
     If none of the field matches it then returns all records with limit of 200
     */    
 
-@AuraEnabled
+    @AuraEnabled(cacheable=true)
 public static List<Account> getPatientDetails(String firstName, String lastName, String phone, String email, String ssn, String mrn,
                     String country, String city, String state, String zipcode, String street, String dateofBirth){
     System.debug(firstName+' '+lastName+' '+phone+' '+email+' '+ssn+' '+mrn+' '+country+' '+city+' '+state+' '+zipcode+' '+street+' '+dateofBirth);
@@ -138,7 +138,7 @@ public static List<Account> getPatientDetails(String firstName, String lastName,
         return records;
 }
 
-@AuraEnabled
+@AuraEnabled(cacheable=true)
 public static Account createPatient(String firstName, String lastName, String phone, String email, String ssn, String mrn,
 String country, String city, String state, String zipcode, String street, String dateofBirth){
     
