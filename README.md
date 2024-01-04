@@ -1,3 +1,7 @@
+# Demo 
+
+[![Demo](https://github.com/umar-7w4/Salesforce-Patient-Scheduling-System/blob/main/Thumbnail.png)](https://vimeo.com/899691456?share=copy)
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
