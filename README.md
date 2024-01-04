@@ -38,5 +38,9 @@ This proof of concept developed on the Salesforce platform demonstrates the use 
 - Real-time calendar integration for availability tracking.
 - Automated notifications for appointment confirmations and updates.
 
-## Contributions
-Contributions are welcome. Adhere to best practices in Apex and LWC development when contributing.
+## License
+This project is licensed under the @2023 Umar Mohammad
+
+## Contact
+If you have any questions or want to contribute, please email us at mohammadumar7w4@gmail.com
+
