@@ -1,4 +1,4 @@
-# Demo 
+# Salesforce Patient Scheduling System Demo Video (Click the image to access the video)
 
 [![Demo](https://github.com/umar-7w4/Salesforce-Patient-Scheduling-System/blob/main/Thumbnail.png)](https://vimeo.com/899691456?share=copy)
 
