@@ -2,21 +2,41 @@
 
 [![Demo](https://github.com/umar-7w4/Salesforce-Patient-Scheduling-System/blob/main/Thumbnail.png)](https://vimeo.com/899691456?share=copy)
 
-# Salesforce DX Project: Next Steps
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Project Overview
+This proof of concept developed on the Salesforce platform demonstrates the use of Apex, Lightning Web Components (LWC), and SOQL. It includes custom components for Patients, Providers (Doctors), and Appointments, aimed at simplifying the appointment booking process in a medical context.
 
-## How Do You Plan to Deploy Your Changes?
+## Features
+- **Admin Panel for Appointment Booking:** Facilitates appointment scheduling by selecting patients, doctors, and available times.
+- **Multiple Patient Booking:** Enables booking multiple patients for a single appointment, enhancing scheduling efficiency.
+- **Custom Salesforce Objects:** Incorporates custom objects like Patient, Provider, and Appointment for effective data management.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+## Technical Stack
+- **Apex:** For server-side logic and data manipulation.
+- **Lightning Web Components (LWC):** For creating responsive user interfaces.
+- **SOQL:** For querying Salesforce data.
 
-## Configure Your Salesforce DX Project
+## Setup and Configuration
+1. **Salesforce Org Setup:**
+   - Ensure access to a Salesforce org for deployment.
+   - Import the project metadata and components.
+2. **Component Deployment:**
+   - Deploy LWC components, Apex classes, and SOQL queries.
+   - Set up custom objects and fields as per project metadata.
+3. **Admin Configuration:**
+   - Assign necessary permissions to admin users for managing the system.
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+## Usage
+- **Admin Login:**
+  - Log in with Salesforce credentials as an admin.
+- **Booking Appointments:**
+  - Access the Appointment Booking panel.
+  - Select patients, a provider, and an available time slot.
+  - Confirm the appointment booking.
 
-## Read All About It
+## Future Enhancements
+- Real-time calendar integration for availability tracking.
+- Automated notifications for appointment confirmations and updates.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+## Contributions
+Contributions are welcome. Adhere to best practices in Apex and LWC development when contributing.
